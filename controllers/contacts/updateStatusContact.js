@@ -1,12 +1,12 @@
 const { Contact } = require("../../models");
 const { HttpError } = require("../../helpers");
 
-const updateStatusContact = async (requirement, response) => {
+const updateStatusContact = async (requirement, respose) => {
   if (!requirement.body) {
     throw HttpError(400, "Missing field favorite");
   }
 
-  const { contactId } = req.params;
+  const { contactId } = requirement.params;
   const result = await Contact.findByIdAndUpdate(contactId, requirement.body, {
     new: true,
   });
@@ -15,7 +15,7 @@ const updateStatusContact = async (requirement, response) => {
     throw HttpError(404, "Not found");
   }
 
-  return response.status(200).json(result);
+  return respose.status(200).json(result);
 };
 
 module.exports = updateStatusContact;

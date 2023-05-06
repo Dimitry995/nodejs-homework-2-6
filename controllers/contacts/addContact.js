@@ -19,7 +19,7 @@ const addContact = async (requirement, response) => {
     );
   }
 
-  const result = await Contact.create({ ...req.body, owner });
+  const result = await Contact.create({ ...requirement.body, owner });
   return response.status(201).json(result);
 };
 

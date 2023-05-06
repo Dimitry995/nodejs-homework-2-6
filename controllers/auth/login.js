@@ -9,8 +9,13 @@ const login = async (requirement, response) => {
   const { email, password } = requirement.body;
 
   const user = await User.findOne({ email });
+
   if (!user) {
     throw HttpError(401, "User is not found. Please check email");
+  }
+
+  if (!user.verify) {
+    throw HttpError(401, "Email is not verified yet");
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);

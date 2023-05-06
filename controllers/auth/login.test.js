@@ -10,7 +10,7 @@ const { DB_HOST } = process.env;
 // create user for testing
 const testUser = {
   email: "testuser@gmail.com",
-  password: "q1qazsw2",
+  password: "qwerty12345",
   subscription: "pro",
 };
 

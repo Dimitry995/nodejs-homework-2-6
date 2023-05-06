@@ -9,16 +9,29 @@ const {
   validationRegistrationUser,
   validationLoginUser,
   validationSubscription,
+  validationEmailUser,
 } = require("../../models");
 
+// routes for register
 router.post(
   "/register",
   validateBody(validationRegistrationUser),
   cntrl.register
 );
 
+router.get("/verify/:verificationToken", cntrl.verifyEmail);
+
+// resend email letter for verification
+router.post(
+  "/verify",
+  validateBody(validationEmailUser),
+  cntrl.resendVerifyEmail
+);
+
+// login route
 router.post("/login", validateBody(validationLoginUser), cntrl.login);
 
+// others routes
 router.get("/current", authenticate, cntrl.getCurrentUser);
 
 router.post("/logout", authenticate, cntrl.logout);
