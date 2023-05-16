@@ -1,9 +1,9 @@
 const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 
-const { BASE_URL } = process.env;
+const { BASE_URL } = 'localhost:3600';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey('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');
 
 const sendEmail = async (email, verificationToken) => {
   const newEmail = {

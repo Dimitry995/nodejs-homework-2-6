@@ -7,8 +7,8 @@ const { HttpError, modifyImage } = require("../../helpers");
 const avatarDir = path.join(__dirname, "../../", "public", "avatars");
 const avatarExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "tiff"];
 
-const updateAvatar = async (requirement, response) => {
-  console.log(requirement.file);
+const updateAvatar = async (req, response) => {
+  console.log(req.file);
   const { _id } = req.user;
   const { path: tempUpload, originalname } = req.file;
   const avatarName = `${_id}_${originalname}`;

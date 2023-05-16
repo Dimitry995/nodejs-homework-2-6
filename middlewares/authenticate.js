@@ -2,12 +2,13 @@ const jwt = require("jsonwebtoken");
 
 const { HttpError } = require("../helpers");
 const { User } = require("../models");
-const { SECRET_KEY } = process.env;
+//const { request } = require("../app");
+const { SECRET_KEY } = 'goal';
 
-const authenticate = async (requirement, response, next) => {
+const authenticate = async (req, res, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
-
+  if (token === true) {
   if (bearer !== "Bearer" || !token) {
     next(HttpError(401, "User is unauthorized"));
   }
@@ -24,12 +25,16 @@ const authenticate = async (requirement, response, next) => {
       next(HttpError(401, "The token is invalid"));
     }
 
-    requirement.user = user;
+    req.user = user;
 
     next();
   } catch {
     next(HttpError(401, "The token is invalid"));
   }
+}
+else {
+  next(HttpError(401, "The token is invalid"));
+}
 };
 
 module.exports = authenticate;

@@ -6,7 +6,7 @@ const { User } = require("../../models");
 const { HttpError, sendEmail } = require("../../helpers");
 
 const register = async (requirement, response) => {
-  const { email, subscription, password } = requirement.body;
+  const { password, email, subscription } = requirement.body;
 
   const user = await User.findOne({ email });
   if (user) {
