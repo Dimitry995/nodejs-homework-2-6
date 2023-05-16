@@ -119,8 +119,11 @@ const {addSchema, updateSchema, updateFavoriteSchema} = require("../../models/co
 const {Contact} = require("../../models/contact");
 const {addSchema, updateSchema, updateFavoriteSchema} = require("../../models/contact")
 
+<<<<<<< HEAD
+=======
 >>>>>>> master
 <<<<<<< HEAD
+>>>>>>> b2b353669b449349822edecb08b428e80cfd37d8
 const {RequestError} = require("../../helpers");
 const {isValidId, authenticate} = require("../../middlewares")
 
@@ -239,6 +242,8 @@ router.delete('/:contactId', authenticate, isValidId, async (req, res, next) => 
     next(error)
   }
 })
+<<<<<<< HEAD
+=======
 
 =======
 const router = express.Router();
@@ -264,3 +269,4 @@ router.put('/:contactId', isValidId, validateBody(schemas.addSchema), cntrl.upda
 router.patch("/:contactId/favorite", isValidId, validateBody(schemas.updateFavoriteSchema), cntrl.updateStatusContact);
 
 module.exports = router;
+>>>>>>> b2b353669b449349822edecb08b428e80cfd37d8

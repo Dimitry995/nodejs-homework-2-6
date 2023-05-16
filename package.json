@@ -9,6 +9,19 @@
     "lint:fix": "eslint --fix **/*.js"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cross-env": "7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.1.0",
+    "morgan": "^1.10.0",
+    "nanoid": "^3.3.6"
+=======
     "bcrypt": "^5.1.0",
 <<<<<<< HEAD
 =======
@@ -68,6 +81,7 @@
 =======
 >>>>>>> master
 >>>>>>> 7fbc2ec0e540fff9d018902e98b5c3c4bfa5020e
+>>>>>>> b2b353669b449349822edecb08b428e80cfd37d8
   },
   "devDependencies": {
     "eslint": "7.19.0",

@@ -1,6 +1,5 @@
-const {HttpError} = require('../helpers')
+const {RequestError} = require('../helpers')
 
-<<<<<<< HEAD
 const validateBody = (schema) => {
     const fn = (req, res, next) => {
         const validationResult = schema.validate(req.body);
@@ -11,6 +10,8 @@ const validateBody = (schema) => {
         next();
     }
     return fn;
+<<<<<<< HEAD
+=======
 =======
 const validateBody = schema => {
 
@@ -24,6 +25,7 @@ const validateBody = schema => {
     }
     return func;
 >>>>>>> master
+>>>>>>> b2b353669b449349822edecb08b428e80cfd37d8
 }
 
 module.exports = validateBody;

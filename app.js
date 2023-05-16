@@ -61,6 +61,12 @@ app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json())
 
+<<<<<<< HEAD
+app.use('/api/contacts', contactsRouter);
+app.use('/api/users', usersRouter);
+
+module.exports = app;
+=======
 app.use('/api/contacts', contactsRouter)
 app.use('/api/users', usersRouter)
 
@@ -88,3 +94,4 @@ module.exports = app
 =======
 >>>>>>> master
 >>>>>>> 7fbc2ec0e540fff9d018902e98b5c3c4bfa5020e
+>>>>>>> b2b353669b449349822edecb08b428e80cfd37d8

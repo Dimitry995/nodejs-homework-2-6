@@ -9,11 +9,12 @@ app.listen(3560, () => {
 const mongoose = require('mongoose')
 const app = require('./app')
 
-<<<<<<< HEAD
-const DB_HOST = "mongodb+srv://dimas_zd:X32fCHGr6VWrtOXj@cluster13.ecufgwe.mongodb.net/contacts?retryWrites=true&w=majority"
+const DB_HOST = "mongodb+srv://dimas_zd:X32fCHGr6VWrtOXj@cluster13.ecufgwe.mongodb.net/contacts?retryWrites=true&w=majority";
 
 const {PORT = 2900} = process.env;
 
+<<<<<<< HEAD
+=======
 =======
 const mongoose = require('mongoose')
 const app = require('./app')
@@ -26,9 +27,10 @@ const {PORT = 2900} = process.env;
 >>>>>>> master
 =======
 >>>>>>> master
+>>>>>>> b2b353669b449349822edecb08b428e80cfd37d8
 mongoose.set("strictQuery", true);
 
-mongoose.connect('mongodb+srv://dimas_zd:X32fCHGr6VWrtOXj@cluster13.ecufgwe.mongodb.net/contacts?retryWrites=true&w=majority')
+mongoose.connect(DB_HOST)
   .then(() => {
 		app.listen(3650, () => {
 			console.log("Database connection successful");
