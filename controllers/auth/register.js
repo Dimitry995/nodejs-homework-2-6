@@ -5,8 +5,8 @@ const { nanoid } = require("nanoid");
 const { User } = require("../../models");
 const { HttpError, sendEmail } = require("../../helpers");
 
-const register = async (requirement, response) => {
-  const { password, email, subscription } = requirement.body;
+const register = async (req, res) => {
+  const { password, email, subscription } = req.body;
 
   const user = await User.findOne({ email });
   if (user) {
@@ -22,7 +22,7 @@ const register = async (requirement, response) => {
   const verificationToken = nanoid();
 
   await User.create({
-    ...requirement.body,
+    ...req.body,
     password: hashPassword,
     avatarURL,
     verificationToken,
@@ -30,7 +30,7 @@ const register = async (requirement, response) => {
 
   await sendEmail(email, verificationToken);
 
-  return response.status(201).json({ email, subscription });
+  return res.status(201).json({ email, subscription });
 };
 
 module.exports = register;
