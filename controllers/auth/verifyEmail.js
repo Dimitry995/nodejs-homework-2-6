@@ -1,8 +1,8 @@
 const { User } = require("../../models");
 const { HttpError } = require("../../helpers");
 
-const verifyEmail = async (requirement, response) => {
-  const { verificationToken } = requirement.params;
+const verifyEmail = async (req, res) => {
+  const { verificationToken } = req.params;
   const user = await User.findOne({ verificationToken });
 
   if (!user) {
@@ -14,7 +14,7 @@ const verifyEmail = async (requirement, response) => {
     verificationToken: "",
   });
 
-  response.status(200).json({
+  res.status(200).json({
     message: "Verification successful",
   });
 };
