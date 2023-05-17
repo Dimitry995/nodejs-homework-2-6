@@ -14,6 +14,40 @@ const {
 } = require("../../controllers/contacts.js");
 
 const router = express.Router();
+<<<<<<< HEAD
+const cntrl = require("../../controllers/contacts");
+const { validateBody, isValidId, authenticate } = require("../../middlewares");
+const { validationContact, validationFavorite } = require("../../models");
+
+router.get("/", authenticate, cntrl.getAll);
+
+router.get("/:contactId", authenticate, isValidId, cntrl.getById);
+
+router.post(
+  "/",
+  authenticate,
+  validateBody(validationContact),
+  cntrl.addContact
+);
+
+router.delete("/:contactId", authenticate, isValidId, cntrl.removeContact);
+
+router.put(
+  "/:contactId",
+  authenticate,
+  isValidId,
+  validateBody(validationContact),
+  cntrl.updateContact
+);
+
+router.patch(
+  "/:contactId/favorite",
+  authenticate,
+  isValidId,
+  validateBody(validationFavorite),
+  cntrl.updateStatusContact
+);
+=======
 
 router.get("/", async (req, res, next) => {
   try {
@@ -267,6 +301,7 @@ router.delete('/:contactId', isValidId, cntrl.deleteContact)
 router.put('/:contactId', isValidId, validateBody(schemas.addSchema), cntrl.updateContactById)
   
 router.patch("/:contactId/favorite", isValidId, validateBody(schemas.updateFavoriteSchema), cntrl.updateStatusContact);
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d
 
 module.exports = router;
 >>>>>>> b2b353669b449349822edecb08b428e80cfd37d8

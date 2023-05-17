@@ -10,6 +10,10 @@
   },
   "dependencies": {
 <<<<<<< HEAD
+    "@sendgrid/mail": "^7.7.0",
+=======
+<<<<<<< HEAD
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
