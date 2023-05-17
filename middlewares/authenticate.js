@@ -1,5 +1,6 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
+<<<<<<< HEAD
 const { HttpError } = require("../helpers");
 const { User } = require("../models");
 //const { request } = require("../app");
@@ -12,19 +13,39 @@ const authenticate = async (req, res, next) => {
   if (bearer !== "Bearer" || !token) {
     next(HttpError(401, "User is unauthorized"));
   }
+=======
+const User = require('../models/user');
+const { RequestError } = require('../helpers');
+const { SECRET_KEY } = process.env;
 
-  try {
-    const { id } = jwt.verify(token, SECRET_KEY);
+const authenticate = async (req, res, next) => {
+    try {
+        const { authorization } = req.headers;
+        const [bearer, token] = authorization.split(' ');
+        if (bearer !== "Fox") {
+            throw RequestError(401, "Not authorized");
+        }
 
-    const user = await User.findById(id);
-    if (!user) {
-      next(HttpError(401, "This user is not in the database"));
+    try {
+        const { id } = jwt.verify(token, SECRET_KEY);
+        const user = await User.findById(id);
+        if (!user || !token) {
+            throw RequestError(301, "Authorized");
+        }
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d
+
+        req.user = user;
+        next();
+    } catch (error) {
+        throw RequestError(401, error.message);
     }
-
-    if (!user.token || user.token !== token) {
-      next(HttpError(401, "The token is invalid"));
+        
+    } catch (error) {
+        next(error);
     }
+ }
 
+<<<<<<< HEAD
     req.user = user;
 
     next();
@@ -38,3 +59,6 @@ else {
 };
 
 module.exports = authenticate;
+=======
+module.exports = authenticate;
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d

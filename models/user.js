@@ -1,6 +1,10 @@
-const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+<<<<<<< HEAD
+<<<<<<< HEAD
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
+<<<<<<< HEAD
 const {
   handleMongooseError,
   patterns,
@@ -30,12 +34,41 @@ const validationLoginUser = Joi.object({
     .messages(templatesMsgJoi("email")),
   subscription: Joi.string().valid(...SUBSCRIPTION_TYPES),
 });
-
-// validation subscription
-const validationSubscription = Joi.object({
-  subscription: Joi.string().valid(...SUBSCRIPTION_TYPES),
+=======
+const users = new Schema({
+  password: {
+    type: String,
+    required: [true, "Password is required"],
+  },
+  email: {
+    type: String,
+    required: [true, "Email is required"],
+    unique: true,
+  },
+  subscription: {
+    type: String,
+    enum: ["starter", "pro", "business"],
+    default: "starter",
+  },
+  token: {
+    type: String,
+    default: null,
+  },
+  avatarURL: {
+    type: String,
+  },
 });
 
+const hashPassword = (pass) => {
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(pass, salt);
+  return hashedPassword;
+};
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d
+
+const User = mongoose.model("user", users);
+
+<<<<<<< HEAD
 // validation email
 const validationEmailUser = Joi.object({
   email: Joi.string()
@@ -48,41 +81,35 @@ const validationEmailUser = Joi.object({
 // mongoose Schema
 const userSchema = new Schema(
   {
+=======
+module.exports = { User, hashPassword };
+=======
+=======
+>>>>>>> master
+const {Schema, model } = require('mongoose');
+const { handleSaveErrors } = require('../helpers')
+const joi = require("joi");
+
+const emailFormat = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+const userSchema = new Schema({
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d
     password: {
-      type: String,
-      validate: [
-        {
-          validator: (v) => v.length >= 6,
-          message: (props) =>
-            `Invalid password. Must be at least 6 characters. Got ${props.value.length}`,
-        },
-      ],
-      required: [true, "The password is required. Set it for user"],
+        type: String,
+        required: [true, 'Set password for user'],
     },
     email: {
-      type: String,
-      unique: true,
-      match: patterns.emailPattern,
-      required: [
-        true,
-        "The email is required. Please provide an email address for user",
-      ],
+        type: String,
+        required: [true, 'Email is required'],
+        match: emailFormat,
+        unique: true,
     },
     subscription: {
-      type: String,
-      default: "starter",
-      validate: {
-        validator: function (v) {
-          return SUBSCRIPTION_TYPES.includes(v);
-        },
-        message: (props) =>
-          `${
-            props.value
-          } is not a valid subscription type. Must be: ${SUBSCRIPTION_TYPES.join(
-            ", or "
-          )}`,
-      },
+        type: String,
+        enum: ["starter", "pro", "business"],
+        default: "starter"
     },
+<<<<<<< HEAD
     token: {
       type: String,
       default: "",
@@ -99,10 +126,14 @@ const userSchema = new Schema(
   },
   { versionKey: false, timestamps: true }
 );
+=======
+    token: String
+}, { versionKey: false, timestamps: true });
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d
 
-userSchema.post("save", handleMongooseError);
-const User = model("user", userSchema);
+userSchema.post("save", handleSaveErrors);
 
+<<<<<<< HEAD
 module.exports = {
   User,
   validationRegistrationUser,
@@ -110,3 +141,33 @@ module.exports = {
   validationSubscription,
   validationEmailUser,
 };
+=======
+ const registerSchema = joi.object({
+    name: joi.string().required(),
+    email: joi.string().pattern(emailFormat).required(),
+    password: joi.string().min(6).required(),
+
+  })
+
+  const loginSchema = joi.object({
+    email: joi.string().pattern(emailFormat).required(),
+    password: joi.string().min(6).required(),
+  })
+
+  const schemas = {
+    registerSchema,
+    loginSchema
+  }
+
+  const User = model("user", userSchema);
+
+  module.exports = {
+    schemas,
+    User
+<<<<<<< HEAD
+  }
+>>>>>>> 03ddca3ab856225ac93889b1ec630c997ac37fef
+=======
+  }
+>>>>>>> master
+>>>>>>> 149d037b901c496217c28487456525c1fc612d2d
